@@ -3,9 +3,14 @@ var asteroids = []
 var astro
 let asteroid
 let bg 
+let party
 let x = 1
 let y = 1
 let easing = 0.02
+let font
+let font1
+let font2
+let music
 
 // Preload function
 
@@ -13,6 +18,11 @@ function preload() {
     astro = loadImage('astronaut.png');
     asteroid = loadImage('story/asteroid.png');
     bg = loadImage('story/bg.png')
+    font = loadFont('story/spaceage.ttf');
+    font1 = loadFont('story/RetroGaming.ttf');
+    font2 = loadFont('story/Aveny.ttf');
+    music = loadSound('story/music.mp3')
+    
   }
 
 // Setup function
@@ -20,30 +30,69 @@ function preload() {
 function setup() { 
   createCanvas(windowWidth, windowHeight);
   astronaut = new astronaut();
+  party = new Party()
   for (var i = 0; i < 5; i++) {
   	asteroids.push(new Asteroid());
   }
 } 
+
+
+//Party
+function Party(){
+  this.inc = 0
+}
+
+//begin the party
+function enter() {
+  
+  homePage()
+  if (keyIsDown(13)) {
+    party.inc=1
+    music.play()
+  
+
+  }else if(keyIsDown(67)){
+   party.inc=2
+   music.play()
+  
+  }
+}
 
 // Draw function
 
 function draw() { 
   background(bg)
   
-  for (var i = 0; i < asteroids.length; i++) {
-    if (astronaut.hits(asteroids[i])) {
-      alert('u lost')
+  switch(party.inc){
+    case 0:
+      enter()
+      break
+    case 1:
+      {
+      for (var i = 0; i < asteroids.length; i++) {
+        if (astronaut.hits(asteroids[i])) {
+          alert('u lost')
+          
+        }
+        
+        asteroids[i].render();
+        asteroids[i].update();
+        asteroids[i].edges();
+      }
       
+      
+      astronaut.render();
+      astronaut.edges();
+
+      break
     }
-    
-    asteroids[i].render();
-  	asteroids[i].update();
-    asteroids[i].edges();
+      case 2: 
+        credit()
+        break
+      
+      
+
   }
-  
-  
-  astronaut.render();
-  astronaut.edges();
   
   
 }
@@ -147,9 +196,59 @@ function astronaut() {
 
   function homePage(){
 
-      background()
+    background(bg)
+    textFont(font, 70)
+    textAlign(CENTER)
+    fill(255)
+    text('LONG LIVE THE ASTRONAUT', width/2, height/4);
+
+    textFont(font1, 45)
+    textAlign(CENTER)
+    fill(255)
+    text('Press "Enter" to continue' , width/2, height/2)
+    textFont(font1, 30)
+    textAlign(CENTER)
+    fill(255)
+    text('Press "C" for credits' , width/2, height/2+100)
+
+
+    
 
   }
   
+  function credit(){
 
+    background(bg)
+    textFont(font, 70)
+    textAlign(CENTER)
+    fill(255)
+    text('CREDITS :', width/2, height/4);
+
+    textFont(font2, 45)
+    textAlign(CENTER)
+    fill(255)
+    text('This Game is the result of hard work and dedication of ' , width/2, height/2-100)
+    textFont(font2, 45)
+    textAlign(CENTER)
+    fill(255)
+    text('two very talented and handsome students of YouCode Safi' , width/2, height/2-40)
+    textFont(font2, 45)
+    textAlign(CENTER)
+    fill(255)
+    text('Anas Benziti - Abdellah Daif' , width/2, height/2+50)
+    textFont(font2, 30)
+    textAlign(CENTER)
+    fill(255)
+    text('1st Edition  of the Alan Turing Game Jam' , width/2, height/2+150)
+    textFont(font2, 20)
+    textAlign(CENTER)
+    fill(255)
+    text('17th-19th April 2020' , width/2, height/2+180)
+  
+
+
+    
+
+  }
+  
 
