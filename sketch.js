@@ -1,15 +1,21 @@
-var astronaut;
-var asteroids = [];
-var astro;
-let asteroid;
-let x = 1;
-let y = 1;
-let easing = 0.02;
+var astronaut
+var asteroids = []
+var astro
+let asteroid
+let bg 
+let x = 1
+let y = 1
+let easing = 0.02
+
+// Preload function
 
 function preload() {
     astro = loadImage('astronaut.png');
     asteroid = loadImage('story/asteroid.png');
+    bg = loadImage('story/bg.png')
   }
+
+// Setup function
 
 function setup() { 
   createCanvas(windowWidth, windowHeight);
@@ -19,8 +25,10 @@ function setup() {
   }
 } 
 
+// Draw function
+
 function draw() { 
-  background(0);
+  background(bg)
   
   for (var i = 0; i < asteroids.length; i++) {
     if (astronaut.hits(asteroids[i])) {
@@ -39,6 +47,8 @@ function draw() {
   
   
 }
+
+// Astronaut shape function
 
 function astronaut() {
     this.pos = createVector(width/2, height/2);
@@ -90,6 +100,7 @@ function astronaut() {
     
   }
   
+  // Asteraoid shape function
 
   function Asteroid() {
          this.pos = createVector(random(width), random(height));
@@ -130,6 +141,14 @@ function astronaut() {
       }
     }
     
+  }
+
+  // Home page function
+
+  function homePage(){
+
+      background()
+
   }
   
 
