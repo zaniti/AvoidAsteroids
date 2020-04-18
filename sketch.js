@@ -12,6 +12,7 @@ let font1
 let font2
 let music
 
+
 // Preload function
 
 function preload() {
@@ -30,9 +31,11 @@ function preload() {
 function setup() { 
   createCanvas(windowWidth, windowHeight);
   astronaut = new astronaut();
+  music.setVolume(0.3)
   party = new Party()
   for (var i = 0; i < 5; i++) {
-  	asteroids.push(new Asteroid());
+    asteroids.push(new Asteroid());
+    
   }
 } 
 
@@ -71,7 +74,11 @@ function draw() {
       {
       for (var i = 0; i < asteroids.length; i++) {
         if (astronaut.hits(asteroids[i])) {
-          alert('u lost')
+          textFont(font, 70)
+          textAlign(CENTER)
+          fill(255)
+          text('GAME OVER', width/2, height/2);
+          alert('Refresh Page to reload the Game')
           
         }
         
