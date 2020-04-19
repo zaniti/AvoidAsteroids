@@ -293,7 +293,7 @@ function astronaut() {
     textAlign(CENTER)
     fill(255)
     text('“3, 2, 1...” were the last words i remember before the crash of our ship. ' , width/2, 400)
-    text('Am i the only one alive from the crew ? ' , width/2, 450)
+    text('Am i the only one alive yet from the crew ? ' , width/2, 450)
     text('The only way for me to survive is to reach the emergency recovery kit.' , width/2, 500)
     text('But first i need you to help me avoid those asteroids.' , width/2, 550)
     text('I have two kids, and i will never forgive you if you let me die!' , width/2, 600)
