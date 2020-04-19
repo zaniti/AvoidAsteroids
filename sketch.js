@@ -10,7 +10,12 @@ let easing = 0.02
 let font
 let font1
 let font2
+let font3
+let bg1
+let storyImg
 let music
+
+
 
 
 // Preload function
@@ -22,6 +27,10 @@ function preload() {
     font = loadFont('story/spaceage.ttf');
     font1 = loadFont('story/RetroGaming.ttf');
     font2 = loadFont('story/Aveny.ttf');
+    font3 = loadFont('story/storyfont.ttf');
+    
+    bg1 = loadImage('story/bg1.png')
+    storyImg = loadImage('story/storyimg.png')
     music = loadSound('story/music.mp3')
     
   }
@@ -31,8 +40,9 @@ function preload() {
 function setup() { 
   createCanvas(windowWidth, windowHeight);
   astronaut = new astronaut();
-  music.setVolume(0.3)
+  music.setVolume(0.2)
   party = new Party()
+  
   for (var i = 0; i < 5; i++) {
     asteroids.push(new Asteroid());
     
@@ -49,14 +59,14 @@ function Party(){
 function enter() {
   
   homePage()
-  if (keyIsDown(13)) {
-    party.inc=1
-    music.play()
+  if (keyIsDown(83)) {
+    party.inc=2
+   
   
 
   }else if(keyIsDown(67)){
-   party.inc=2
-   music.play()
+   party.inc=3
+   
   
   }
 }
@@ -74,13 +84,16 @@ function draw() {
       {
       for (var i = 0; i < asteroids.length; i++) {
         if (astronaut.hits(asteroids[i])) {
-          textFont(font, 70)
+          textFont(font, 100)
           textAlign(CENTER)
           fill(255)
           text('GAME OVER', width/2, height/2);
-          alert('Refresh Page to reload the Game')
+          textFont(font, 30)
+          text('Please "Refresh" the page to play again', width/2, height/2+100);
+          return
           
         }
+       
         
         asteroids[i].render();
         asteroids[i].update();
@@ -94,7 +107,19 @@ function draw() {
       break
     }
       case 2: 
+        story()
+        if(keyIsDown(13)){
+          party.inc=1
+          music.play()
+      
+         }
+        break
+      case 3: 
         credit()
+        if(keyIsDown(8)){
+          party.inc=0
+      
+         }
         break
       
       
@@ -212,7 +237,7 @@ function astronaut() {
     textFont(font1, 45)
     textAlign(CENTER)
     fill(255)
-    text('Press "Enter" to continue' , width/2, height/2)
+    text('Press "S" to Start' , width/2, height/2)
     textFont(font1, 30)
     textAlign(CENTER)
     fill(255)
@@ -251,11 +276,32 @@ function astronaut() {
     textAlign(CENTER)
     fill(255)
     text('17th-19th April 2020' , width/2, height/2+180)
-  
-
-
-    
+    textFont(font2, 50)
+    textAlign(CENTER)
+    fill(255)
+    text('Press "Backspace" to go back !' , width/2, height/2+280)
 
   }
-  
 
+  function story(){
+    background(bg1)
+    storyImg.resize(300,0)
+    image(storyImg,width/2-150,100)
+
+    textFont(font3, 35)
+    textAlign(CENTER)
+    fill(255)
+    text('“3, 2, 1...” were the last words i remember before the crash of our ship ' , width/2, 450)
+    text('am i the only survivor of the crew ? ' , width/2, 500)
+    text('The only way for me to survive is to reach the emergency recovery kit' , width/2, 550)
+    text('but first i need you to help me avoid those asteroids' , width/2, 600)
+    text('I have two kids, and i will never forgive you if you let me die' , width/2, 650)
+    textFont(font3, 30)
+    text('Press "Enter" to continue ..' , width/2+500, 750)
+   
+    
+
+
+  }
+
+ 
